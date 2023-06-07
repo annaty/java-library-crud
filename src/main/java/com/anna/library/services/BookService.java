@@ -26,11 +26,13 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-//    public Iterable<Book> getBorrowedBooks(Long user) {
-//    }
-//
-//    public Iterable<Book> getAvailableBooks() {
-//    }
+    public Iterable<Book> getBorrowedBooks() {
+        return bookRepository.getAllCurrentlyBorrowedBooks();
+    }
+
+    public Iterable<Book> getAvailableBooks() {
+        return bookRepository.getAllAvailableBooks();
+    }
 
     public Book saveBook(Book book) {
         return bookRepository.save(book);

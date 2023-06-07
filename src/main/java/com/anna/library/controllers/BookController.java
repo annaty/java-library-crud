@@ -55,7 +55,7 @@ public class BookController {
     }
 
     @GetMapping("/books/delete/{id}")
-    public String deleteBook(@PathVariable("id") Long id, Model model) {
+    public String deleteBook(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
         return "redirect:/books";
     }

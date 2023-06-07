@@ -9,6 +9,33 @@
 <body>
 <h1>Client view</h1>
 <h2>Borrowed books</h2>
+<ul>
+    <li th:each="currentLending : ${currentLendings}">
+        <span>
+            <strong th:text="${currentLending.book.title}"></strong>
+            <i th:text="${currentLending.book.author.firstName} + ' ' + ${currentLending.book.author.lastName}"></i></span>
+        (<a th:href="@{'/client/return/' + ${currentLending.id}}">Return</a>)
+    </li>
+</ul>
 <h2>Books available for lending</h2>
+<ul>
+    <li th:each="book : ${availableBooks}">
+        <span><strong th:text="${book.title}"></strong> <i th:text="${book.author.firstName} + ' ' + ${book.author.lastName}"></i></span>
+        (<a th:href="@{'/client/lend/' + ${book.id}}">Borrow</a>)
+    </li>
+</ul>
+<h2>History</h2>
+<ul>
+    <li th:each="pastLending : ${pastLendings}">
+        <span><strong th:text="${pastLending.book.title}"></strong></span>
+        <i>
+            (
+            <span th:text="${pastLending.bookLendingDate}"></span>
+            -
+            <span th:text="${pastLending.returnDate}"></span>
+            )
+        </i>
+    </li>
+</ul>
 </body>
 </html>

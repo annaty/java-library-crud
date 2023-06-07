@@ -20,7 +20,7 @@ public class BookLending {
     LocalDate bookLendingDate;
     @Column(name = "estimated_return_date", nullable = false)
     LocalDate estimatedReturnDate;
-    @Column(name = "return_date", nullable = false)
+    @Column(name = "return_date")
     LocalDate returnDate;
     @Column(name = "book_id", nullable = false)
     Long bookId;
@@ -29,7 +29,7 @@ public class BookLending {
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     private Book book;
 
-    public BookLending (LocalDate bookLendingDate, LocalDate estimatedReturnDate, LocalDate returnDate, Long clientId, Long bookId) {
+    public BookLending (LocalDate bookLendingDate, LocalDate estimatedReturnDate, LocalDate returnDate, Long bookId) {
         this.bookLendingDate = bookLendingDate;
         this.estimatedReturnDate = estimatedReturnDate;
         this.returnDate = returnDate;

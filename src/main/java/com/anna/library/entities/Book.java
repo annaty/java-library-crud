@@ -28,6 +28,8 @@ public class Book {
     Long categoryId;
     @Column(name = "author_id", nullable = false)
     Long authorId;
+    @Column(name = "is_lent", nullable = false)
+    boolean isLent;
 
     @OneToMany(mappedBy = "book")
     private Collection<BookLending> bookLendings;
@@ -46,8 +48,17 @@ public class Book {
         this.pageCount = numberOfPages;
         this.categoryId = categoryId;
         this.authorId = authorId;
+        this.isLent = false;
     }
 
     public Book() {
+    }
+
+    public void lendBook() {
+        this.isLent = true;
+    }
+
+    public void returnBook() {
+        this.isLent = false;
     }
 }
