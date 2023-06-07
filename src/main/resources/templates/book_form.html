@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book form</title>
+  <style>
+    .form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+    }
+
+    .form > * {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Add new book</h1>
+  <form th:action="@{/books/save}" method="post" th:object="${book}" class="form">
+    <label for="title">Title</label>
+    <input type="text" th:field="*{title}" id="title" name="title" required />
+    <label for="author">Author</label>
+    <select th:field="*{authorId}" id="author">
+      <option
+              th:each="author : ${authors}"
+              th:value="${author.id}"
+              th:text="${author.firstName} + ' ' + ${author.lastName}"></option>
+    </select>
+    <label for="category">Category</label>
+    <select th:field="*{categoryId}" id="category">
+      <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select>
+    <label for="date">Publication date</label>
+    <input type="date" th:field="*{publicationDate}" id="date" name="date" required />
+    <label for="page">Page count</label>
+    <input type="number" th:field="*{pageCount}" id="page" name="page" required />
+    <button type="submit" value="Save">Save</button>
+  </form>
+</body>
+</html>

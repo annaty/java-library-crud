@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <style>
+        .link {
+            display: block;
+            margin-top: 10px;
+            padding: 20px;
+            border: rebeccapurple 1px solid;
+            border-radius: 10px;
+            max-width: 300px;
+            text-align: center;
+            }
+    </style>
+</head>
+<body>
+    <h1>Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Publication date</th>
+                <th>Page count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.title}">Title</td>
+                <td th:text="${book.author.firstName} + ' ' + ${book.author.lastName}">Author</td>
+                <td th:text="${book.category.name}">Category</td>
+                <td th:text="${book.publicationDate}">Publication date</td>
+                <td th:text="${book.pageCount}">Page count</td>
+            </tr>
+        </tbody>
+    </table>
+    <a class="link" th:href="@{/books/new}">Add book</a>
+</body>
+</html>
