@@ -32,9 +32,10 @@ public class BookService {
 //    public Iterable<Book> getAvailableBooks() {
 //    }
 
-    public Book newBook(Book book) {
+    public Book saveBook(Book book) {
         return bookRepository.save(book);
     }
+
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
     }

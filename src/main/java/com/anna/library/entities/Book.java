@@ -3,6 +3,7 @@ package com.anna.library.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class Book {
     @Column(name = "title", nullable = false)
     String title;
     @Column(name = "publication_date", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate publicationDate;
     @Column(name = "page_count", nullable = false)
     Integer pageCount;

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Librarian view</title>
+    <style>
+        .column {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <h1>Librarian view</h1>
+    <div class="column">
+        <a th:href="@{/books}">Book section</a>
+        <a th:href="@{/authors}">Author section</a>
+        <a th:href="@{/categories}">Category section</a>
+        <a th:href="@{/lendings}">Book lending section</a>
+    </div>
+</body>
+</html>

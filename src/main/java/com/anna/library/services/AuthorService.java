@@ -22,7 +22,11 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public Author newAuthor(Author author) {
+    public Author saveAuthor(Author author) {
         return authorRepository.save(author);
+    }
+
+    public void deleteAuthor(Long id) {
+        authorRepository.deleteById(id);
     }
 }

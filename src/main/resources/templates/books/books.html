@@ -12,7 +12,11 @@
             border-radius: 10px;
             max-width: 300px;
             text-align: center;
-            }
+        }
+
+        td, th {
+            padding: 5px 10px 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +38,12 @@
                 <td th:text="${book.category.name}">Category</td>
                 <td th:text="${book.publicationDate}">Publication date</td>
                 <td th:text="${book.pageCount}">Page count</td>
+                <td>
+                    <a th:href="@{'/books/edit/' + ${book.id}}">Edit</a>
+                </td>
+                <td>
+                    <a th:href="@{'/books/delete/' + ${book.id}}">Delete</a>
+                </td>
             </tr>
         </tbody>
     </table>

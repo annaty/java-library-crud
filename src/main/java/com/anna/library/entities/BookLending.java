@@ -22,8 +22,6 @@ public class BookLending {
     LocalDate estimatedReturnDate;
     @Column(name = "return_date", nullable = false)
     LocalDate returnDate;
-    @Column(name = "client_id", nullable = false)
-    Long clientId;
     @Column(name = "book_id", nullable = false)
     Long bookId;
 
@@ -31,23 +29,17 @@ public class BookLending {
     @JoinColumn(name = "book_id", insertable = false, updatable = false)
     private Book book;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id", insertable = false, updatable = false)
-    private Client client;
-
     public BookLending (LocalDate bookLendingDate, LocalDate estimatedReturnDate, LocalDate returnDate, Long clientId, Long bookId) {
         this.bookLendingDate = bookLendingDate;
         this.estimatedReturnDate = estimatedReturnDate;
         this.returnDate = returnDate;
-        this.clientId = clientId;
         this.bookId = bookId;
     }
 
-    public BookLending (Long clientId, Long bookId) {
+    public BookLending (Long bookId) {
         this.bookLendingDate = LocalDate.now();
         this.estimatedReturnDate = LocalDate.now().plusDays(30);
         this.returnDate = null;
-        this.clientId = clientId;
         this.bookId = bookId;
     }
 
@@ -55,7 +47,6 @@ public class BookLending {
         this.bookLendingDate = LocalDate.now();
         this.estimatedReturnDate = LocalDate.now().plusDays(30);
         this.returnDate = null;
-        this.clientId = null;
         this.bookId = null;
     }
 

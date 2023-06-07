@@ -22,7 +22,11 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public Category newCategory(Category category) {
+    public Category saveCategory(Category category) {
         return categoryRepository.save(category);
+    }
+
+    public void deleteCategory(Long id) {
+        categoryRepository.deleteById(id);
     }
 }

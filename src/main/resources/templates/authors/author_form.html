@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]]</title>
+    <style>
+        .form {
+            display: flex;
+            flex-direction: column;
+            max-width: 400px;
+        }
+
+        .form > * {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>[[${pageTitle}]]</h1>
+<form th:action="@{/authors/save}" method="post" th:object="${author}" class="form">
+    <input type="hidden" th:field="*{id}" />
+    <label for="first-name">First Name</label>
+    <input type="text" th:field="*{firstName}" id="first-name" name="first-name" required />
+    <label for="last-name">Last Name</label>
+    <input type="text" th:field="*{lastName}" id="last-name" name="last-name" required />
+    <button type="submit" value="Save">Save</button>
+</form>
+</body>
+</html>
