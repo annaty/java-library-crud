@@ -30,6 +30,8 @@ public class Book {
     Long authorId;
     @Column(name = "is_lent", nullable = false)
     boolean isLent;
+    @Column(name = "is_deleted", nullable = false)
+    boolean isDeleted;
 
     @OneToMany(mappedBy = "book")
     private Collection<BookLending> bookLendings;
@@ -60,5 +62,13 @@ public class Book {
 
     public void returnBook() {
         this.isLent = false;
+    }
+
+    public void deleteBook() {
+        this.isDeleted = true;
+    }
+
+    public Integer getLendingsCount() {
+        return this.bookLendings.size();
     }
 }

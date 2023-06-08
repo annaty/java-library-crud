@@ -7,6 +7,9 @@ import com.anna.library.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.stream.StreamSupport;
+
 @Service
 public class BookLendingService {
     @Autowired
@@ -47,5 +50,11 @@ public class BookLendingService {
             bookLendingRepository.save(bookLending);
             return true;
         }).orElse(false);
+    }
+
+    public Iterable<BookLending> searchBookLendingsByDate(LocalDate startDate, LocalDate endDate) {
+        return StreamSupport.stream(bookLendingRepository.findAll().spliterator(), false)
+                .filter(bookLending -> !(bookLending.getBookLendingDate().isBefore(startDate) || bookLending.getBookLendingDate().isAfter(endDate)))
+                .toList();
     }
 }

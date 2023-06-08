@@ -2,14 +2,18 @@ package com.anna.library;
 
 import com.anna.library.entities.Author;
 import com.anna.library.entities.Book;
+import com.anna.library.entities.BookLending;
 import com.anna.library.entities.Category;
+import com.anna.library.repositories.BookLendingRepository;
 import com.anna.library.services.AuthorService;
+import com.anna.library.services.BookLendingService;
 import com.anna.library.services.BookService;
 import com.anna.library.services.CategoryService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 
@@ -21,6 +25,11 @@ public class LibraryApplication {
 	private CategoryService categoryService;
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	private BookLendingService bookLendingService;
+	@Autowired
+	private BookLendingRepository bookLendingRepository;
+
 	@Autowired
 
 	public static void main(String[] args) {
@@ -68,6 +77,26 @@ public class LibraryApplication {
 					"For Whom the Bell Tolls",
 					LocalDate.of(1940, 10, 1),
 					300, 1L, 5L));
+		}
+		if (bookLendingService.isRepositoryEmpty()) {
+			bookLendingService.lendBook(new BookLending(
+					LocalDate.parse("2023-03-01"),
+					LocalDate.parse("2023-04-01"),
+					LocalDate.parse("2023-03-23"),
+					1L
+			));
+			bookLendingService.lendBook(new BookLending(
+					LocalDate.parse("2023-04-01"),
+					LocalDate.parse("2023-05-01"),
+					LocalDate.parse("2023-04-23"),
+					3L
+			));
+			bookLendingService.lendBook(new BookLending(
+					LocalDate.parse("2023-04-10"),
+					LocalDate.parse("2023-05-10"),
+					LocalDate.parse("2023-04-30"),
+					2L
+			));
 		}
 	}
 

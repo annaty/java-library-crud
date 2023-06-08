@@ -6,6 +6,8 @@ import com.anna.library.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.StreamSupport;
+
 @Service
 public class BookService {
     @Autowired
@@ -39,6 +41,15 @@ public class BookService {
     }
 
     public void deleteBook(Long id) {
-        bookRepository.deleteById(id);
+        bookRepository.findById(id).ifPresent(book -> {
+            book.deleteBook();
+            bookRepository.save(book);
+        });
+    }
+
+    public Iterable<Book> searchBooksByAuthor(String query) {
+        return StreamSupport.stream(bookRepository.findAll().spliterator(), false)
+                .filter(book -> book.getAuthor().getFirstName().toLowerCase().contains(query.toLowerCase()) || book.getAuthor().getLastName().toLowerCase().contains(query.toLowerCase()))
+                .toList();
     }
 }

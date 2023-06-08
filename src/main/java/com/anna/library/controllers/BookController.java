@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BookController {
@@ -33,7 +34,7 @@ public class BookController {
     public String newBook(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("authors", authorService.getAuthors());
-        model.addAttribute("categories", categoryService.getCategories());
+        model.addAttribute("categories", categoryService.getAvailableCategories());
         model.addAttribute("pageTitle", "Add new book");
         return "books/book_form";
     }
@@ -49,7 +50,7 @@ public class BookController {
 
         model.addAttribute("book", bookService.getBook(id));
         model.addAttribute("authors", authorService.getAuthors());
-        model.addAttribute("categories", categoryService.getCategories());
+        model.addAttribute("categories", categoryService.getAvailableCategories());
         model.addAttribute("pageTitle", "Edit book");
         return "books/book_form";
     }
@@ -58,5 +59,12 @@ public class BookController {
     public String deleteBook(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
         return "redirect:/books";
+    }
+
+    @GetMapping("/books/search{query}")
+    public String searchBooksByAuthor(@RequestParam(value = "query") String query, Model model) {
+        model.addAttribute("books", bookService.searchBooksByAuthor(query));
+        model.addAttribute("authors", authorService.getAuthors());
+        return "books/books";
     }
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book lendings</title>
+    <style>
+        .link {
+            display: block;
+            margin-top: 10px;
+            padding: 20px;
+            border: rebeccapurple 1px solid;
+            border-radius: 10px;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        td, th {
+            padding: 5px 10px 5px 0;
+        }
+    </style>
+</head>
+<body>
+<h1>Book lendings</h1>
+<h3>Search book lendings within date range</h3>
+<form th:action="@{/lendings/search}" method="get" class="form">
+    <label for="startDate">Start date</label>
+    <input type="date" th:name="startDate" id="startDate">
+    <label for="endDate">End date</label>
+    <input type="date" th:name="endDate" id="endDate">
+    <button type="submit">Search</button>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>Book</th>
+        <th>Lending date</th>
+        <th>Estimated return date</th>
+        <th>Return date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bl : ${bookLendings}">
+        <td th:text="${bl.book.title}">Book</td>
+        <td th:text="${bl.bookLendingDate}">Lending date</td>
+        <td th:text="${bl.estimatedReturnDate}">Estimated return date</td>
+        <td th:text="${bl.returnDate}">Return date</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -25,11 +25,13 @@
   <thead>
   <tr>
     <th>Name</th>
+    <th>Deleted</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="category : ${categories}">
-    <td th:text="${category.name}">First name</td>
+    <td th:text="${category.name}">Name</td>
+    <td th:text="${category.isDeleted}">Deleted</td>
     <td>
       <a th:href="@{'/categories/edit/' + ${category.id}}">Edit</a>
     </td>

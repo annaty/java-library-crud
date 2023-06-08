@@ -16,11 +16,17 @@
 
         td, th {
             padding: 5px 10px 5px 0;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <h1>Books</h1>
+    <form th:action="@{/books/search}" method="get" class="form">
+        <label for="search">Search books by author name</label>
+        <input type="text" th:name="query" id="search">
+        <button type="submit">Search</button>
+    </form>
     <table>
         <thead>
             <tr>
@@ -29,6 +35,8 @@
                 <th>Category</th>
                 <th>Publication date</th>
                 <th>Page count</th>
+                <th>Deleted</th>
+                <th>Lending count</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +46,8 @@
                 <td th:text="${book.category.name}">Category</td>
                 <td th:text="${book.publicationDate}">Publication date</td>
                 <td th:text="${book.pageCount}">Page count</td>
+                <td th:text="${book.isDeleted}">Deleted</td>
+                <td th:text="${book.getLendingsCount()}">Lending count</td>
                 <td>
                     <a th:href="@{'/books/edit/' + ${book.id}}">Edit</a>
                 </td>

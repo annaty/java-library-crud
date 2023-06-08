@@ -22,11 +22,18 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public Iterable<Category> getAvailableCategories() {
+        return categoryRepository.getAllAvailableCategories();
+    }
+
     public Category saveCategory(Category category) {
         return categoryRepository.save(category);
     }
 
     public void deleteCategory(Long id) {
-        categoryRepository.deleteById(id);
+        categoryRepository.findById(id).ifPresent(category -> {
+            category.deleteCategory();
+            categoryRepository.save(category);
+        });
     }
 }

@@ -19,11 +19,15 @@ public class Category {
     @Column(name = "name", nullable = false)
     String name;
 
+    @Column(name = "is_deleted", nullable = false)
+    boolean isDeleted;
+
     @OneToMany(mappedBy = "category")
     private Collection<Book> books;
 
     public Category (String name) {
         this.name = name;
+        this.isDeleted = false;
     }
 
     public Collection<Book> getBooks() {
@@ -31,5 +35,9 @@ public class Category {
     }
 
     public Category() {
+    }
+
+    public void deleteCategory() {
+        this.isDeleted = true;
     }
 }
