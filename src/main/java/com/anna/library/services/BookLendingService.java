@@ -54,7 +54,7 @@ public class BookLendingService {
 
     public Iterable<BookLending> searchBookLendingsByDate(LocalDate startDate, LocalDate endDate) {
         return StreamSupport.stream(bookLendingRepository.findAll().spliterator(), false)
-                .filter(bookLending -> !(bookLending.getBookLendingDate().isBefore(startDate) || bookLending.getBookLendingDate().isAfter(endDate)))
+                .filter(bookLending -> !(bookLending.getBookLendingDate().isBefore(startDate) || bookLending.getReturnDate().isAfter(endDate)))
                 .toList();
     }
 }
